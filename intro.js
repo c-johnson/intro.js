@@ -137,7 +137,7 @@
           };
         }
       }
-
+g
       //next add intro items without data-step
       //todo: we need a cleanup here, two loops are redundant
       var nextStep = 0;
@@ -1144,28 +1144,16 @@
    * @returns Element's position info
    */
   function _getOffset(element) {
-    var elementPosition = {};
-
-    //set width
-    elementPosition.width = element.offsetWidth;
-
-    //set height
-    elementPosition.height = element.offsetHeight;
-
-    //calculate element top and left
-    var _x = 0;
-    var _y = 0;
-    while (element && !isNaN(element.offsetLeft) && !isNaN(element.offsetTop)) {
-      _x += element.offsetLeft;
-      _y += element.offsetTop;
-      element = element.offsetParent;
-    }
-    //set top
-    elementPosition.top = _y;
-    //set left
-    elementPosition.left = _x;
-
-    return elementPosition;
+      var elementPosition = {};
+  
+      elementPosition.width = element.offsetWidth;
+      elementPosition.height = element.offsetHeight;
+  
+      var clientRect = element.getBoundingClientRect();
+      elementPosition.top = clientRect.top;
+      elementPosition.left = clientRect.left;
+  
+      return elementPosition;
   }
 
   /**
